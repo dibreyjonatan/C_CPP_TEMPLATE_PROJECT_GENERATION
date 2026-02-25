@@ -1,0 +1,6 @@
+#!/bin/bash
+# Auteur : DIBREY JONATAN
+# Version : 0.1
+# Date de demarrage : 25/02/2026 
+
+echo " L'Outil genesis est conçu pour générer automatiquement des templates pour projet C ou C++"
