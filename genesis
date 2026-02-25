@@ -2,5 +2,30 @@
 # Auteur : DIBREY JONATAN
 # Version : 0.1
 # Date de demarrage : 25/02/2026 
-
+# No IA used 
 echo " L'Outil genesis est conçu pour générer automatiquement des templates pour projet C ou C++"
+
+# Definit le nom du projet 
+PROJECT_NAME=""
+# Pour choisir le language de programmation 
+LANGUAGE=""
+
+# Ici je cherche à lire les arguements passé 
+# Quand il n'y a pas d'arguement $# c'est 0 
+# Donc à chaque fois on lit $1 et $2 et on decale à gauche de 2, jusquà arriver à $#=0
+while [[ "$#" -gt 0 ]] ; do 
+    case "$1" in 
+    --cxx | -l )
+    LANGUAGE="$2"
+    shift 2 ;; 
+    --title | -t )
+    PROJECT_NAME="$2"
+    shift 2 ;;
+    --help | -h )
+    echo "Pour utiliser ce script, il faut fournir obligatoirement un nom et le language de programmation"
+    echo " exemple : genesis -l c -t test  ou encore genesis --cxx c --title test"
+    shift 2 
+    exit 0 ;;  
+    esac
+done 
+
