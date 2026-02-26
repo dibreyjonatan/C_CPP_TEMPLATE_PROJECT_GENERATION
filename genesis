@@ -28,6 +28,14 @@ function C_Repo_gen {
 function CPP_Repo_gen {
     mkdir "$1"
     touch "$1"/test.cpp "$1"/test.h 
+    # fichier test.cpp
+    echo "#include \"test.h\"" >> "$1"/test.cpp
+    echo "" >> "$1"/test.cpp
+    echo "int main(int argc, char ** argv) { std::cout << \"hello world\" <<std::endl ; return 0 ; } " >> "$1"/test.cpp
+    # fichier test.h
+    echo "#pragma once" >> "$1"/test.h
+    echo "#include <iostream>" >> "$1"/test.h
+    
 
 }
 
