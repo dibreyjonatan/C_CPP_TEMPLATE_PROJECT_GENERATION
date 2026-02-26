@@ -2,17 +2,32 @@
 # Auteur : DIBREY JONATAN
 # Version : 0.1
 # Date de demarrage : 25/02/2026 
-# No IA used 
+# No IA used
 echo " L'Outil genesis est conçu pour générer automatiquement des templates pour projet C ou C++"
 
 # Definit le nom du projet 
 PROJECT_NAME=""
 # Pour choisir le language de programmation 
 LANGUAGE=""
+# J'ai ajouté ce bloque de code car quand on oublie de passer un arguement le program tourne en une boucle infinie.
+# Le but de ce code est de lire les arguements si la taille de $# est 4, si non on cherche à savoir si l'utilisateur veut juste faire une recherche -h ou --help
+# Si non on déclanche une erreur, et on sort
+if [ "$#" -lt 4 ] ; then 
+  if [ "$1" == "-h" -o "$1" == "--help" ] ; then 
+  echo -e "" 
+   
+   else 
+   echo " essayez la commande : genesis --help pour avoir plus d'information "
+   exit 1 
+
+   fi 
+else 
+  echo -e ""
+  fi 
 
 # Ici je cherche à lire les arguements passé 
 # Quand il n'y a pas d'arguement $# c'est 0 
-# Donc à chaque fois on lit $1 et $2 et on decale à gauche de 2, jusquà arriver à $#=0
+# Donc à chaque fois on lit $1 et $2 et on decale à gauche de 2, jusquà arriver à $#=0  
 while [[ "$#" -gt 0 ]] ; do 
     case "$1" in 
     --cxx | -l )
@@ -23,9 +38,26 @@ while [[ "$#" -gt 0 ]] ; do
     shift 2 ;;
     --help | -h )
     echo "Pour utiliser ce script, il faut fournir obligatoirement un nom et le language de programmation"
-    echo " exemple : genesis -l c -t test  ou encore genesis --cxx c --title test"
+    echo " exemple : genesis -l c -t test  ou encore genesis --cxx cpp --title test"
     shift 2 
     exit 0 ;;  
     esac
 done 
 
+if [ -n "$PROJECT_NAME"  ] ; then 
+
+if [ "$LANGUAGE" == "c" ] ; then 
+ echo "creation d'un template en language c "
+
+elif [ "$LANGUAGE" == "cpp" ] ; then 
+ echo "creation d'un template en language c++ "
+else 
+echo " tapez genesis -h pour plus d'info "
+exit 1
+fi 
+
+else 
+ echo "erreur pas de nom de projet"
+ echo "tapez genesis -h pour plus d'info"
+ exit 1 
+fi  
