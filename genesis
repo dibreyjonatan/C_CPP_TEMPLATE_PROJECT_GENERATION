@@ -3,6 +3,27 @@
 # Version : 0.1
 # Date de demarrage : 25/02/2026 
 # No IA used
+
+# utilisation des fonctions pour rendre le travail plus comprehensible 
+# Une fonction pour la generation de Makefile
+# Une fonction pour la generation du repertoire en C 
+# Une fonction pour la generation du repertoire en C++
+function Makefile_gen {
+   touch "$1"/Makefile 
+
+}
+
+function C_Repo_gen {
+     mkdir "$1"
+     touch "$1"/test.c "$1"/test.h
+}
+
+function CPP_Repo_gen {
+    mkdir "$1"
+    touch "$1"/test.cpp "$1"/test.h 
+
+}
+
 echo " L'Outil genesis est conçu pour générer automatiquement des templates pour projet C ou C++"
 
 # Definit le nom du projet 
@@ -48,9 +69,10 @@ if [ -n "$PROJECT_NAME"  ] ; then
 
 if [ "$LANGUAGE" == "c" ] ; then 
  echo "creation d'un template en language c "
-
+      C_Repo_gen "$PROJECT_NAME"
 elif [ "$LANGUAGE" == "cpp" ] ; then 
  echo "creation d'un template en language c++ "
+      CPP_Repo_gen "$PROJECT_NAME"
 else 
 echo " tapez genesis -h pour plus d'info "
 exit 1
