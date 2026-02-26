@@ -10,7 +10,25 @@
 # Une fonction pour la generation du repertoire en C++
 function Makefile_gen {
    touch "$1"/Makefile 
-
+   echo "CC=$2" >> "$1"/Makefile
+   if [ "$3" == "c" ] ; then 
+   echo "CFLAGS=-Wall -Werror" >> "$1"/Makefile 
+   fi 
+   echo "src=\$(wildcard *.$3 ) " >> "$1"/Makefile 
+   echo "objs=\$(patsubst %.$3,%.o, \$(src))" >> "$1"/Makefile 
+   echo ".PHONY : clean, run " >> "$1"/Makefile
+   echo "clean :" >> "$1"/Makefile
+   echo -e "\trm *.o bin ||: " >> "$1"/Makefile 
+   echo "run : bin" >> "$1"/Makefile 
+   echo -e "\t ./$^ " >> "$1"/Makefile
+   echo "bin : \$(objs)" >> "$1"/Makefile 
+   echo -e "\t \$(CC) $^ -o \$@" >> "$1"/Makefile 
+   echo "%.o : \$(src) " >> "$1"/Makefile 
+   if [ "$3" == "c" ] ; then 
+   echo -e "\t \$(CC) -c \$(CFLAGS) $^ -o \$@" >> "$1"/Makefile 
+   else 
+   echo -e "\t \$(CC) -c $^ -o \$@" >> "$1"/Makefile 
+   fi
 }
 
 function C_Repo_gen {
@@ -85,9 +103,11 @@ if [ -n "$PROJECT_NAME"  ] ; then
 if [ "$LANGUAGE" == "c" ] ; then 
  echo "creation d'un template en language c "
       C_Repo_gen "$PROJECT_NAME"
+      Makefile_gen "$PROJECT_NAME" "gcc" "$LANGUAGE"
 elif [ "$LANGUAGE" == "cpp" ] ; then 
  echo "creation d'un template en language c++ "
       CPP_Repo_gen "$PROJECT_NAME"
+       Makefile_gen "$PROJECT_NAME" "g++" "$LANGUAGE"
 else 
 echo " tapez genesis -h pour plus d'info "
 exit 1
