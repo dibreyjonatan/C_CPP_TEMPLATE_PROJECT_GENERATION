@@ -33,26 +33,26 @@ function Makefile_gen {
 
 function C_Repo_gen {
      mkdir "$1"
-     touch "$1"/test.c "$1"/test.h
+     touch "$1"/"$1".c "$1"/"$1".h
      # fichier test.c
-     echo "#include \"test.h\"" >> "$1"/test.c
-     echo "" >> "$1"/test.c
-     echo "int main(int argc, char **argv){ printf(\"hello world\n\"); return 0 ; } " >> "$1"/test.c
+     echo "#include \"$1.h\"" >> "$1"/"$1".c
+     echo "" >> "$1"/"$1".c
+     echo "int main(int argc, char **argv){ printf(\"hello world\n\"); return 0 ; } " >> "$1"/"$1".c
      # fichier test.h
-     echo "#pragma once" >> "$1"/test.h
-     echo "#include <stdio.h>" >> "$1"/test.h
+     echo "#pragma once" >> "$1"/"$1".h
+     echo "#include <stdio.h>" >> "$1"/"$1".h
 }
 
 function CPP_Repo_gen {
     mkdir "$1"
-    touch "$1"/test.cpp "$1"/test.h 
+    touch "$1"/"$1".cpp "$1"/"$1".h 
     # fichier test.cpp
-    echo "#include \"test.h\"" >> "$1"/test.cpp
-    echo "" >> "$1"/test.cpp
-    echo "int main(int argc, char ** argv) { std::cout << \"hello world\" <<std::endl ; return 0 ; } " >> "$1"/test.cpp
+    echo "#include \"$1.h\"" >> "$1"/"$1".cpp
+    echo "" >> "$1"/"$1".cpp
+    echo "int main(int argc, char ** argv) { std::cout << \"hello world\" <<std::endl ; return 0 ; } " >> "$1"/"$1".cpp
     # fichier test.h
-    echo "#pragma once" >> "$1"/test.h
-    echo "#include <iostream>" >> "$1"/test.h
+    echo "#pragma once" >> "$1"/"$1".h
+    echo "#include <iostream>" >> "$1"/"$1".h
     
 
 }
